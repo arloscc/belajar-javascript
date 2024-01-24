@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <style>
+        .content {
+            position: relative;
+            list-style: none;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .check-circle {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #000;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .line-through {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body class="bg-black">
+    <div class=" h-screen bg-gradient-to-r from-indigo-500">
+        <div class="flex justify-center items-center h-svh">
+            <div class="card bg-white  h-[40rem] w-[35rem] rounded-lg flex items-center justify-center">
+                <div class=" h-[40rem] w-[35rem]  ">
+                    <h1 class="font-bold text-xl my-4 p-2 flex justify-center text-indigo-900 ">To Do List   <i  class="mx-4 z-10" data-feather="edit"></i> </h1>
+                    <label class="flex justify-center" for="">
+                        <input id="textInput" placeholder="Masukkan List" class="rounded-xl justify-center flex " type="text">
+                        <button id="addButton" class="duration-300 hover:scale-100 scale-90  bg-black bg-gradient-to-r from-indigo-500  py-2 px-6 rounded-xl"><h1 class="text-white font-base text-sm">add</h1></button>
+                    </label>
+                        <div class="flex justify-start items-center p-8">
+                            <div>
+                                <ul id="listContainer">
+                                    
+                           
+                                </ul>
+                            </div>
+                        </div>
+
+                    
+                    
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</body>
+<script>
+    feather.replace();
+
+
+
+const addButton = document.getElementById('addButton');
+const textInput = document.getElementById('textInput');
+const listContainer = document.getElementById('listContainer');
+
+// Function to handle button click
+addButton.addEventListener('click', function() {
+    // Get the text from the input field
+    const text = textInput.value;
+
+    // Create a new list item element
+    const listItem = document.createElement('li');
+
+    // Add class 'content' to the new list item
+    listItem.classList.add('content');
+
+    // Create a check circle element
+    const checkCircle = document.createElement('div');
+    checkCircle.classList.add('check-circle');
+    checkCircle.addEventListener('click', function() {
+        listItem.classList.toggle('line-through');
+    });
+
+    // Append the check circle to the list item
+    listItem.appendChild(checkCircle);
+
+    // Set the text content of the list item
+    listItem.textContent = text;
+
+    // Append the new list item to the list container
+    listContainer.appendChild(listItem);
+
+    // Clear the input field after adding the item
+    textInput.value = '';
+});
+  </script>
+  
+</html>
